@@ -1,9 +1,9 @@
-# todotui
+# vttd
 
 A Vim-friendly terminal ToDo manager for researchers and developers, built
 with Rust and [Ratatui](https://ratatui.rs/).
 
-`todotui` lets you keep your tasks in the terminal instead of pasting them
+`vttd` lets you keep your tasks in the terminal instead of pasting them
 into a Slack DM. Tasks live in a local SQLite database; tags and projects
 live in a TOML config you control.
 
@@ -31,10 +31,10 @@ Requires a Rust toolchain (stable). The `rusqlite` dependency is built with
 the `bundled` feature, so you do not need a system SQLite library.
 
 ```sh
-git clone <this repo>
+git clone git@github.com:j341nono/vttd.git
 cd vttd
 cargo build --release
-./target/release/todotui
+./target/release/vttd
 ```
 
 Or just run from source:
@@ -180,4 +180,4 @@ extend:
 
 ## License
 
-MIT.
+MIT License.
