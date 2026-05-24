@@ -190,38 +190,45 @@ impl Db {
         if self.count_tasks()? > 0 {
             return Ok(false);
         }
-        let paper_project_id = self.project_id_by_name("論文誌")?;
-        let pbl_project_id = self.project_id_by_name("PBL")?;
-        let research_project_id = self.project_id_by_name("研究")?;
+        let inbox_id = self.project_id_by_name("Inbox")?;
+        let work_id = self.project_id_by_name("Work")?;
+        let personal_id = self.project_id_by_name("Personal")?;
+        let learning_id = self.project_id_by_name("Learning")?;
 
-        let mut paper = Task::new_now("論文誌執筆");
-        paper.project_id = paper_project_id;
-        paper.priority = Priority::High;
-        paper.tags = vec!["研究".into()];
-        let paper_id = self.insert_task(&paper)?;
+        let mut intro = Task::new_now("Try out todotui");
+        intro.project_id = inbox_id;
+        intro.priority = Priority::High;
+        intro.tags = vec!["idea".into()];
+        intro.description = "Welcome! Walk through these subtasks to learn the basics.".to_string();
+        let intro_id = self.insert_task(&intro)?;
 
-        let mut pbl = Task::new_now("PBL資料作り");
-        pbl.project_id = pbl_project_id;
-        pbl.priority = Priority::Medium;
-        pbl.tags = vec!["授業".into()];
-        self.insert_task(&pbl)?;
+        let mut weekly = Task::new_now("Write weekly status update");
+        weekly.project_id = work_id;
+        weekly.priority = Priority::Medium;
+        weekly.tags = vec!["work".into()];
+        self.insert_task(&weekly)?;
 
-        let mut coauth = Task::new_now("共著者用資料作り");
-        coauth.project_id = paper_project_id;
-        coauth.tags = vec!["研究".into()];
-        self.insert_task(&coauth)?;
+        let mut plan = Task::new_now("Plan the week");
+        plan.project_id = personal_id;
+        plan.tags = vec!["personal".into()];
+        self.insert_task(&plan)?;
 
-        let mut paper_read = Task::new_now("論文読み会の論文を読む");
-        paper_read.project_id = research_project_id;
-        paper_read.tags = vec!["研究".into(), "読書".into()];
-        self.insert_task(&paper_read)?;
+        let mut read = Task::new_now("Read a book chapter");
+        read.project_id = learning_id;
+        read.priority = Priority::Low;
+        read.tags = vec!["learning".into()];
+        self.insert_task(&read)?;
 
-        let sub_titles = ["関連研究を書く", "実験設定を書く", "結果表を整える"];
+        let sub_titles = [
+            "Press ? to see all keybindings",
+            "Press a to add your first task",
+            "Press space to mark a task done",
+        ];
         for title in sub_titles {
             let mut s = Task::new_now(title);
-            s.parent_id = Some(paper_id);
-            s.project_id = paper_project_id;
-            s.tags = vec!["研究".into()];
+            s.parent_id = Some(intro_id);
+            s.project_id = inbox_id;
+            s.tags = vec!["idea".into()];
             self.insert_task(&s)?;
         }
 
@@ -352,8 +359,13 @@ mod tests {
     #[test]
     fn seed_runs_only_when_empty() {
         let db = Db::open_in_memory().unwrap();
-        db.ensure_projects(&["論文誌".into(), "PBL".into(), "研究".into()])
-            .unwrap();
+        db.ensure_projects(&[
+            "Inbox".into(),
+            "Work".into(),
+            "Personal".into(),
+            "Learning".into(),
+        ])
+        .unwrap();
         assert!(db.seed_if_empty().unwrap());
         assert!(!db.seed_if_empty().unwrap());
     }

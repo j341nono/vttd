@@ -109,10 +109,10 @@ The Markdown export uses checklist syntax:
 ```markdown
 ## Today
 
-- [ ] 論文誌執筆
-  - [ ] 関連研究を書く
-  - [ ] 実験結果を整理する
-- [ ] PBL資料作り
+- [ ] Try out todotui
+  - [ ] Press ? to see all keybindings
+  - [ ] Press a to add your first task
+- [ ] Write weekly status update
 ```
 
 ## Configuration
@@ -125,10 +125,10 @@ default looks like:
 # Tags are predefined here; the app will not create tags on the fly.
 
 [tags]
-default = ["研究", "授業", "開発", "就活", "生活", "読書"]
+default = ["work", "personal", "urgent", "idea", "learning", "followup"]
 
 [projects]
-default = ["論文誌", "PBL", "研究", "個人開発"]
+default = ["Inbox", "Work", "Personal", "Learning"]
 
 [ui]
 show_done_in_all = false

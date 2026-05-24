@@ -80,21 +80,21 @@ impl Default for PomodoroConfig {
 
 fn default_tags() -> Vec<String> {
     vec![
-        "研究".into(),
-        "授業".into(),
-        "開発".into(),
-        "就活".into(),
-        "生活".into(),
-        "読書".into(),
+        "work".into(),
+        "personal".into(),
+        "urgent".into(),
+        "idea".into(),
+        "learning".into(),
+        "followup".into(),
     ]
 }
 
 fn default_projects() -> Vec<String> {
     vec![
-        "論文誌".into(),
-        "PBL".into(),
-        "研究".into(),
-        "個人開発".into(),
+        "Inbox".into(),
+        "Work".into(),
+        "Personal".into(),
+        "Learning".into(),
     ]
 }
 
@@ -182,8 +182,8 @@ mod tests {
     #[test]
     fn default_config_has_seed_tags() {
         let c = Config::default();
-        assert!(c.tags.default.contains(&"研究".to_string()));
-        assert!(c.projects.default.contains(&"PBL".to_string()));
+        assert!(c.tags.default.contains(&"work".to_string()));
+        assert!(c.projects.default.contains(&"Inbox".to_string()));
         assert_eq!(c.pomodoro.minutes, 25);
     }
 
