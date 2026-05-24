@@ -1,6 +1,6 @@
 # vttd
 
-A Vim-friendly terminal ToDo manager for researchers and developers, built
+**VimTuiToDo** is a Vim-friendly terminal ToDo manager for researchers and developers, built
 with Rust and [Ratatui](https://ratatui.rs/).
 
 `vttd` lets you keep your tasks in the terminal instead of pasting them
