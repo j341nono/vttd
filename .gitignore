@@ -1,0 +1,19 @@
+# Rust build artifacts
+/target
+
+# rustfmt / rustc backup files
+**/*.rs.bk
+
+# macOS
+.DS_Store
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local runtime data accidentally placed in the repo
+*.db
+*.sqlite
+*.sqlite-journal
